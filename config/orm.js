@@ -50,37 +50,38 @@ var orm = {
       cb(result);
     });
   },
-  // create: function(table, cols, vals, cb) {
-  //   var queryString = "INSERT INTO " + table;
+  create: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table;
 
-  //   queryString += " (";
-  //   queryString += cols.toString();
-  //   queryString += ") ";
-  //   queryString += "VALUES (";
-  //   queryString += printQuestionMarks(vals.length);
-  //   queryString += ") ";
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    // queryString += printQuestionMarks(vals);
+    queryString += vals;
+    queryString += ") ";
 
-  //   console.log(queryString);
-
-  //   connection.query(queryString, vals, function(err, result) {
-  //     if (err) {
-  //       throw err;
-  //     }
-
-  //     cb(result);
-  //   });
-  // },
-  create: (table, cols, vals, cb) => {
-    var queryString = `INSERT INTO ${table}`;
-    var colsS = cols.toString();
-    queryString += ` (${colsS}) VALUES ('${vals}');`;
     console.log(queryString);
 
-    connection.query(queryString, vals, (err, result) => {
-      if (err) throw (err);
+    connection.query(queryString, vals, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
       cb(result);
     });
-  },  
+  },
+  // create: (table, cols, vals, cb) => {
+  //   var queryString = `INSERT INTO ${table}`;
+  //   var colsS = cols.toString();
+  //   queryString += ` ('${cols}') VALUES ('${vals}');`;
+  //   console.log(queryString);
+
+  //   connection.query(queryString, vals, (err, result) => {
+  //     if (err) throw (err);
+  //     cb(result);
+  //   });
+  // },  
   update: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 

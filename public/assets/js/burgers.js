@@ -21,15 +21,15 @@ $(function() {
     );
   });
 
-  $(".create-form").on("submit", function(event) {
+  $("#submit-btn").on("click", "button", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
     var newBurger = {
       name: $("#ca").val().trim(),
-      devoured: $("[name=devoured]:checked").val().trim()
+      devoured: 0
     };
-
+    console.log(newBurger, "hello")
     // Send the POST request.
     $.ajax("/api/burgers", {
       type: "POST",
@@ -41,7 +41,9 @@ $(function() {
         location.reload();
       }
     );
+    
   });
+
 
   $(".delete-burger").on("click", function(event) {
     var id = $(this).data("id");
